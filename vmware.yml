@@ -1,5 +1,5 @@
 - name: talk to esx
-  hosts: Vmware
+  hosts: 192.168.1.23
   become: False
   gather_facts: False
   tasks:
