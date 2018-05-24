@@ -5,6 +5,10 @@
   tasks:
   - name: Gather vmware host facts
     vmware_host_facts:
+      hostname: 192.168.1.70
+      username: root
+      password: letmein
+      validate_certs: no
     register: host_facts
     delegate_to: localhost
   - debug: msg="{{ host_facts }}"
