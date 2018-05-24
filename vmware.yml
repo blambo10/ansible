@@ -1,5 +1,5 @@
 - name: talk to esx
-  hosts: vmware
+  hosts: Vmware
   become: False
   gather_facts: True
   tasks:
