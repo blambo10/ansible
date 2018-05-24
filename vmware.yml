@@ -1,11 +1,11 @@
 - name: talk to esx
-  hosts: vmware
+  hosts: 192.168.1.23
   become: False
   gather_facts: False
   tasks:
   - name: Gather vmware host facts
     vmware_host_facts:
-      hostname: 192.168.1.70
+      hostname: 192.168.1.23
       username: root
       password: letmein
       validate_certs: no
