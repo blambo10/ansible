@@ -1,7 +1,7 @@
 - name: talk to esx
   hosts: vmware
   become: False
-  gather_facts: False
+  gather_facts: True
   tasks:
   - name: Gather vmware host facts
     vmware_host_facts:
