@@ -1,5 +1,5 @@
 - name: talk to esx
-  hosts: cOMEON
+  hosts: vmware
   become: False
   gather_facts: False
   tasks:
