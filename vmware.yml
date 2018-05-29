@@ -3,9 +3,9 @@
   become: False
   gather_facts: False
   vars:
-  vmware:
-    username: '{{ lookup("env", "VMWARE_USER") }}'
-    password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+    vmware:
+      username: '{{ lookup("env", "VMWARE_USER") }}'
+      password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
   tasks:
   - name: Gather vmware host facts
     vmware_host_facts:
