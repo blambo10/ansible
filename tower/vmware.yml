@@ -2,15 +2,16 @@
   hosts: infra
   become: False
   gather_facts: False
-  - name: Importing Secrets
-    include_vars:
-      file: "../vault-files/{{ VAULT_FILE }}"
+  vars:
+    vmware:
+      username: '{{ lookup("env", "VMWARE_USER") }}'
+      password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
   tasks:
   - name: Gather vmware host facts
     vmware_host_facts:
       hostname: "{{ inventory_hostname }}"
-      username: "{{ esx-username }}"
-      password: "{{ esx-password }}"
+      username: "{{ vmware.username }}"
+      password: "{{ vmware.password }}"
       validate_certs: no
     register: host_facts
     delegate_to: localhost
