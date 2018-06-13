@@ -6,11 +6,19 @@
   - name: Gather kernel data
     vmware_guest:
       hostname: 192.168.1.70
-      username: "{{ username }}"
-      password: "{{ password }}"
+      username: administrator@vsc.vsc.com
+      password: LetMeIn123!@#
+      #datacenter: Datacenter
       validate_certs: no
       name: "centos 7"
-  #    state: "{{ vmPowerState }}"
+      #folder: "/Datacenter/vm"
+#      cdrom:
+#        type: iso 
+#        iso_path: "[datastore1] centos.iso"
+      #state: "{{ vmPowerState }}"
+      hardware:
+        memory_mb: 3000
+        num_cpus: 2 
     register: host_facts
     delegate_to: localhost
   - debug: msg={{ host_facts }}
