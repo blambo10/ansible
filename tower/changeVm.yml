@@ -15,8 +15,8 @@
       validate_certs: no
       name: "centos 7"
       hardware:
-        memory_mb: 4000
-        num_cpus: 3 
+        memory_mb: 512  
+        num_cpus: 1
     register: host_facts
     delegate_to: localhost
   - debug: msg={{ host_facts }}
