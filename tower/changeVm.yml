@@ -1,5 +1,5 @@
 - name: talk to esx
-  hosts: vmware
+  hosts: infra
   become: False
   gather_facts: False
   vars:
