@@ -8,7 +8,7 @@
       password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
   tasks:
   - name: Gather vmware host facts
-    vmware_host_facts:
+    vmware_guest:
       hostname: "{{ inventory_hostname }}"
       username: "{{ vmware.username }}"
       password: "{{ vmware.password }}"
