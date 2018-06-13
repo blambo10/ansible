@@ -1,0 +1,19 @@
+- name: talk to esx
+  hosts: vmware
+  become: False
+  gather_facts: False
+  tasks:
+  - name: Gather kernel data
+    vmware_guest_find:
+      hostname: 192.168.1.70
+      username: administrator@vsc.vsc.com
+      password: LetMeIn123!@#
+      datacenter: Datacenter
+      validate_certs: no
+      name: "centos 7"
+      #state: "{{ vmPowerState }}"
+    register: host_facts
+    delegate_to: localhost
+  - debug: msg={{ host_facts.folders }}
+  #- name: dump object
+  #- debug: msg="{{ host_facts.host_vmk_facts }}"
