@@ -12,7 +12,7 @@
       state: directory
   - name: Clone Git Repository
     git: 
-      repo: https://github.com/blambo10/ansible.git 
+      repo: https://github.com/blambo10/HomeAutomationSystemClient.git
       dest: /usr/scripts/ 
       force: yes
     register: host_facts
