@@ -10,11 +10,10 @@
     file: 
       path: /usr/scripts/
       state: directory
-#  - name: Clone Git Repository
-#    git: 
-#      repo: git://github.com:blambo10/HomeAutomationSystemClient.git 
-#      dest: /usr/scripts/ 
-#      force: yes
+  - name: Clone Git Repository
+    git: 
+      repo: git://github.com:blambo10/HomeAutomationSystemClient.git 
+      dest: /usr/scripts/ 
+      force: yes
     register: host_facts
-    #delegate_to: localhost
   - debug: msg={{ host_facts }}
