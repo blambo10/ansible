@@ -1,1 +1,13 @@
-
+- name: Install Home Automation System
+  hosts: "{{ HOST_GROUP_TO_INCLUDE }}"
+  tasks:
+  - name: Create directory
+    file: path=/usr/scripts/
+  - name: Clone Git Repository
+    git: 
+      repo: git://github.com:blambo10/HomeAutomationSystemClient.git 
+      dest: /usr/scripts/ 
+      force: yes
+    register: host_facts
+    delegate_to: localhost
+  - debug: msg={{ host_facts }}
