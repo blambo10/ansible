@@ -2,6 +2,10 @@
   hosts: "{{ HOST_GROUP_TO_INCLUDE }}"
   become: true
   tasks:
+  - name: installed required packages
+    yum:
+      name: git
+      state: latest
   - name: Create directory
     file: 
       path: /usr/scripts/
