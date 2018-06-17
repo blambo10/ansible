@@ -5,9 +5,9 @@
   tasks:
   - name: Gather kernel data
     vmware_guest_find:
-      hostname: 192.168.1.70
-      username: administrator@vsc.vsc.com
-      password: LetMeIn123!@#
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
       datacenter: Datacenter
       validate_certs: no
       name: "centos 7"
