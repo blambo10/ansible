@@ -1,5 +1,6 @@
 - name: Install Home Automation System
   hosts: "{{ HOST_GROUP_TO_INCLUDE }}"
+  become: true
   tasks:
   - name: Create directory
     file: path=/usr/scripts/
