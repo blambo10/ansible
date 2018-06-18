@@ -4,8 +4,10 @@
   tasks:
   - name: installed required packages
     yum:
-      name: git
-      state: latest
+      name: "{{ item }}"
+    with_items:
+      - git
+      - python 
   - name: Create directory
     file: 
       path: /usr/scripts/
