@@ -8,6 +8,9 @@
     with_items:
       - git
       - python 
+  - name: Install Python module for networking
+    easy_install:
+      name: configparser
   - name: Create directory
     file: 
       path: /usr/scripts/
