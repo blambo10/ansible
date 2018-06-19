@@ -13,12 +13,14 @@
       name: configparser
   - name: Create directory
     file: 
-      path: /usr/scripts/
+      path: /usr/scripts/has/
       state: directory
   - name: Clone Git Repository
     git: 
       repo: https://github.com/blambo10/HomeAutomationSystemClient.git
-      dest: /usr/scripts/ 
+      dest: /usr/scripts/has/
       force: yes
+  - name: copy HASagent
+    template: src=templates/hasagent.config dest=/usr/scripts/has/hasagent.config mode=0644
     register: host_facts
   - debug: msg={{ host_facts }}
