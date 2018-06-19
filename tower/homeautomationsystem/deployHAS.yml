@@ -24,5 +24,7 @@
     template: src=templates/hasagent.config dest=/usr/scripts/has/hasagent.config mode=0644
   - name: Allow HAS in the firewall
     command: firewall-cmd --add-rich-rule 'rule family="ipv4" port protocol="tcp" port="6060" accept' --permanent
+  - name: Reload firewalld
+    command: firewall-cmd --reload
     register: host_facts
   - debug: msg={{ host_facts }}
