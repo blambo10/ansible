@@ -21,8 +21,7 @@
       dest: "{{ installation_directory }}"
       force: yes
   - name: copy HASagent config
-    template: 
-      src: templates/hasagent.config dest=/usr/scripts/has/hasagent.config mode=0644
+    template: src=templates/hasagent.config dest=/usr/scripts/has/hasagent.config mode=0644
   - name: copy Service
     template: src=templates/HASagent.service dest=/usr/lib/systemd/system/HASagent.service 
   - name: Allow HAS in the firewall
