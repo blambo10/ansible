@@ -13,15 +13,21 @@
       name: configparser
   - name: Create directory
     file: 
-      path: /usr/scripts/has/
+      path: "{{ installation_directory }}"
       state: directory
   - name: Clone Git Repository
     git: 
       repo: https://github.com/blambo10/HomeAutomationSystemClient.git
-      dest: /usr/scripts/has/
+      dest: "{{ installation_directory }}"
       force: yes
-  - name: copy HASagent
-    template: src=templates/hasagent.config dest=/usr/scripts/has/hasagent.config mode=0644
+  - name: copy HASagent config
+    template: 
+      src: templates/hasagent.config 
+      dest: "{{ installation_directory }}hasagent.config" mode=0644
+  - name: copy Service
+    template: 
+      src: templates/HASagent.service
+      dest: /usr/lib/systemd/system/HASagent.service 
   - name: Allow HAS in the firewall
     command: firewall-cmd --add-rich-rule 'rule family="ipv4" port protocol="tcp" port="6060" accept' --permanent
   - name: Reload firewalld
