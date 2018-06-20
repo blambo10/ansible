@@ -22,12 +22,9 @@
       force: yes
   - name: copy HASagent config
     template: 
-      src: templates/hasagent.config 
-      dest: "{{ installation_directory }}hasagent.config" mode=0644
+      src: templates/hasagent.config dest=/usr/scripts/has/hasagent.config mode=0644
   - name: copy Service
-    template: 
-      src: templates/HASagent.service
-      dest: /usr/lib/systemd/system/HASagent.service 
+    template: src=templates/HASagent.service dest=/usr/lib/systemd/system/HASagent.service 
   - name: Allow HAS in the firewall
     command: firewall-cmd --add-rich-rule 'rule family="ipv4" port protocol="tcp" port="6060" accept' --permanent
   - name: Reload firewalld
