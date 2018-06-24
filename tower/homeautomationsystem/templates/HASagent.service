@@ -6,8 +6,8 @@ After=network.target
 Type=simple
 User=root
 Group=root
-WorkingDirectory="{{ installation_directory }}"
-ExecStart=/usr/bin/python -u "{{ installation_directory }}HomeAutomationAgent.py"
+WorkingDirectory={{ installation_directory }}
+ExecStart=/usr/bin/python -u {{ installation_directory }}HomeAutomationAgent.py
 StandardOutput=syslog
 StandardError=syslog
 
