@@ -28,10 +28,10 @@
     command: systemctl status firewalld
     ignore_errors: yes
     changed_when: false
-    register: firewallstat | success
+    register: firewallstat
   - name: Allow HAS in the firewall
     command: firewall-cmd --add-rich-rule 'rule family="ipv4" port protocol="tcp" port="6060" accept' --permanent
-    when: firewallstat 
+    when: firewallstat | success 
   - name: Reload firewalld
     command: firewall-cmd --reload
   - name: Reload Service Daemon
