@@ -24,14 +24,14 @@
     template: src=templates/hasagent.config dest=/usr/scripts/has/hasagent.config mode=0644
   - name: copy Service
     template: src=templates/HASagent.service dest=/usr/lib/systemd/system/HASagent.service 
-  - name: Check if firewalld is running
-    command: systemctl status firewalld
-    ignore_errors: yes
-    changed_when: false
-    register: firewallstat
+  #- name: Check if firewalld is running
+  #  command: systemctl status firewalld
+  #  ignore_errors: yes
+  #  changed_when: false
+  #  register: firewallstat
   - name: Allow HAS in the firewall
     command: firewall-cmd --add-rich-rule 'rule family="ipv4" port protocol="tcp" port="6060" accept' --permanent
-    when: firewallstat | success 
+    when: skip_firewalld is not defined 
   - name: Reload firewalld
     command: firewall-cmd --reload
   - name: Reload Service Daemon
