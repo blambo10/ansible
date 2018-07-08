@@ -26,9 +26,8 @@
     template: src=templates/HASagent.service dest=/usr/lib/systemd/system/HASagent.service 
   - name: Check if firewalld is running
     command: systemctl status firewalld
-    ignore_errors: True
-    changed_when: True
     register: firewallstat
+    ignore_errors: True
   - name: Allow HAS in the firewall
     command: firewall-cmd --add-rich-rule 'rule family="ipv4" port protocol="tcp" port="6060" accept' --permanent
     when:  firewallstat.stdout.find('running') != -1
