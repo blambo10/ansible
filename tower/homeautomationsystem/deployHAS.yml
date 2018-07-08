@@ -25,12 +25,13 @@
   - name: copy Service
     template: src=templates/HASagent.service dest=/usr/lib/systemd/system/HASagent.service 
   - name: Check if firewalld is running
-    service: 
-      name: firewalld
-    register: firewallstat
+    command: systemctl status firewalld
+    ignore_errors: yes
+    changed_when: false
+    register: firewallstat | success
   - name: Allow HAS in the firewall
     command: firewall-cmd --add-rich-rule 'rule family="ipv4" port protocol="tcp" port="6060" accept' --permanent
-    when: firewallstat == 'started'
+    when: firewallstat 
   - name: Reload firewalld
     command: firewall-cmd --reload
   - name: Reload Service Daemon
