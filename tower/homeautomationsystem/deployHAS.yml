@@ -27,7 +27,7 @@
   - name: Check if firewalld is running
     command: systemctl status firewalld
     ignore_errors: yes
-    changed_when: false
+    #changed_when: false
     register: firewallstat
   - name: Allow HAS in the firewall
     command: firewall-cmd --add-rich-rule 'rule family="ipv4" port protocol="tcp" port="6060" accept' --permanent
