@@ -5,14 +5,14 @@
   tasks:
   - name: Import Vault Files
     include_vars:
-      file: "../../vault-files/vmwareCreds.yml"
+      file: "../../vault-files/vsphere-vault.yml"
     no_log: true
   tasks:
   - name: Gather vmware host facts
     vmware_vm_facts:
       hostname: "{{ vcenter }}"
-      username: "{{ vc_username }}"
-      password: "{{ vc_password }}"
+      username: "{{ vc-username }}"
+      password: "{{ vc-password }}"
       validate_certs: no
     delegate_to: localhost
     register: virtualMachineFacts
