@@ -1,5 +1,5 @@
 - name: Testing Tags
-  hosts: infra
+  hosts: {{ HOSTS_TO_INCLUDE }}
   become: False
   gather_facts: False
   tasks:
