@@ -16,7 +16,7 @@
     delegate_to: localhost
     register: virtualMachineFacts
   - name: Configuring VM Advance configs
-    vmware_guests:
+    vmware_guest:
       hostname: "{{ vcenter }}"
       username: "{{ vc_username }}"
       password: "{{ vc_password }}"
