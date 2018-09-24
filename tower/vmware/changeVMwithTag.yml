@@ -1,0 +1,31 @@
+- name: Testing Tags
+  hosts: infra
+  become: False
+  gather_facts: False
+  tasks:
+  - name: Import Vault Files
+    include_vars:
+      file: "../../vault-files/vmwareCreds.yml"
+    no_log: true
+  tasks:
+  - name: Gather vmware host facts
+    vmware_vm_facts:
+      hostname: "{{ vcenter }}"
+      username: "{{ vc_username }}"
+      password: "{{ vc_password }}"
+      validate_certs: no
+    delegate_to: localhost
+    register: virtualMachineFacts
+  - name: Configuring VM Advance configs
+    vmware_guests:
+      hostname: "{{ vcenter }}"
+      username: "{{ vc_username }}"
+      password: "{{ vc_password }}"
+      validate_certs: no
+    uuid: "{{ item.value.uuid }}"
+    customvalues:
+      - key: tools.setinfo.sizelimit
+        value: 1337
+    loop: "{{ lookup('dict', virtualMachineFacts.virtual_machines) }}"
+    delegate_to: localhost
+  #- debug: msg="{{  }}"
