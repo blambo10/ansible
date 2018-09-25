@@ -9,7 +9,7 @@
     #no_log: true
   - name: Gather vmware host facts
     vmware_vm_facts:
-      hostname: "{{ vcenter }}"
+      hostname: "{{ inventory_hostname }}"
       username: "{{ vc-username }}"
       password: "{{ vc-password }}"
       validate_certs: no
@@ -17,7 +17,7 @@
     register: virtualMachineFacts
   - name: Configuring VM Advance configs
     vmware_guest:
-      hostname: "{{ vcenter }}"
+      hostname: "{{ inventory_hostname }}"
       username: "{{ vc-username }}"
       password: "{{ vc-password }}"
       validate_certs: no
