@@ -18,8 +18,8 @@
   - name: Configuring VM Advance configs
     vmware_guest:
       hostname: "{{ vcenter }}"
-      username: "{{ vc_username }}"
-      password: "{{ vc_password }}"
+      username: "{{ vc-username }}"
+      password: "{{ vc-password }}"
       validate_certs: no
     uuid: "{{ item.value.uuid }}"
     customvalues:
