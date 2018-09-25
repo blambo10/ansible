@@ -6,7 +6,7 @@
   - name: Import Vault Files
     include_vars:
       file: "../../vault-files/vsphere-vault.yml"
-    no_log: true
+    #no_log: true
   - name: Gather vmware host facts
     vmware_vm_facts:
       hostname: "{{ vcenter }}"
