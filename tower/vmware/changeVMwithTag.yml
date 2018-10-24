@@ -15,24 +15,37 @@
       validate_certs: no
     delegate_to: localhost
     register: virtualMachineFacts
-  - name: Gather Tags information
-    vmware_tag_facts:
+  - name: Extract Tags
+    vmware_guest_facts:
       hostname: "{{ inventory_hostname }}"
       username: "{{ vc_username }}"
       password: "{{ vc_password }}"
-      validate_certs: no
-    delegate_to: localhost
-    register: tagFacts
-  - name: Configuring VM Advance configs
-    vmware_guest:
-      hostname: "{{ inventory_hostname }}"
-      username: "{{ vc_username }}"
-      password: "{{ vc_password }}"
-      validate_certs: no
       uuid: "{{ item.value.uuid }}"
-      customvalues:
-        - key: tools.setinfo.sizelimit
-          value: 1337
-    loop: "{{ lookup('dict', virtualMachineFacts.virtual_machines) }}"
+      datacenter: 
+      tags: yes
+      validate_certs: no
     delegate_to: localhost
-  - debug: msg="{{ tagFacts }}"
+    loop: "{{ lookup('dict', virtualMachineFacts.virtual_machines) }}"
+    register: vmDataFromGuestFact
+  - debug: msg="{{ vmDataFromGuestFact }}"
+  #- name: Gather Tags information
+  #  vmware_tag_facts:
+  #    hostname: "{{ inventory_hostname }}"
+  #    username: "{{ vc_username }}"
+  #    password: "{{ vc_password }}"
+  #    validate_certs: no
+  #  delegate_to: localhost
+  #  register: tagFacts
+#  - name: Configuring VM Advance configs
+#    vmware_guest:
+#      hostname: "{{ inventory_hostname }}"
+#      username: "{{ vc_username }}"
+#      password: "{{ vc_password }}"
+#      validate_certs: no
+#      uuid: "{{ item.value.uuid }}"
+#      customvalues:
+#        - key: tools.setinfo.sizelimit
+#          value: 1337
+#    loop: "{{ lookup('dict', virtualMachineFacts.virtual_machines) }}"
+#    delegate_to: localhost
+  
