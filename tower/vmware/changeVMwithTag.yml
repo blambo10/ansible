@@ -21,7 +21,7 @@
       username: "{{ vc_username }}"
       password: "{{ vc_password }}"
       uuid: "{{ item.value.uuid }}"
-      datacenter: 
+      datacenter: Datacenter
       tags: yes
       validate_certs: no
     delegate_to: localhost
