@@ -16,7 +16,7 @@
       role: testy
       principal: bryce
       object_type: Folder
-      object_name: testFolder
+      object_name: Test
       state: present
       validate_certs: no
       datacenter: "{{ dcstored }}"
