@@ -7,24 +7,20 @@
     include_vars:
       file: "../../vault-files/vsphere-vault.yml"
     #no_log: true
-  - name: Gather vmware host facts
-    vmware_vm_facts:
-      hostname: "{{ inventory_hostname }}"
-      username: "{{ vc_username }}"
-      password: "{{ vc_password }}"
-      validate_certs: no
-    delegate_to: localhost
-    register: virtualMachineFacts
   - name: Extract Tags
-    vmware_guest_facts:
+    vmware_object_role_permission:
       hostname: "{{ inventory_hostname }}"
       username: "{{ vc_username }}"
       password: "{{ vc_password }}"
-      uuid: "{{ item.value.uuid }}"
+      recursive: no
+      role: testy
+      principal: bryce
+      object_type: Folder
+      object_name: testFolder
+      state: present
+      validate_certs: no
       datacenter: "{{ dcstored }}"
       tags: yes
       validate_certs: no
     delegate_to: localhost
-    loop: "{{ lookup('dict', virtualMachineFacts.virtual_machines) }}"
-    register: vmDataFromGuestFact
-  - debug: msg="{{ vmDataFromGuestFact }}"
+  #- debug: msg="{{ vmDataFromGuestFact }}"
