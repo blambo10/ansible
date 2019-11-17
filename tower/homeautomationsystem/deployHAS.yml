@@ -19,7 +19,10 @@
 #   - name: Create directory
   - name: Install Python module for networking
     pip:
-      name: configparser
+      name: 
+        - configparser
+        - ipaddress
+        - socket
   - name: Create directory
     file: 
       path: "{{ installation_directory }}"
