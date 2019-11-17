@@ -13,7 +13,6 @@
       - python3-pip
       - ansible
       - platform
-      - socket
       - ipaddress
 #   - name: Install Python module for networking
 #     easy_install:
