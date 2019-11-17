@@ -2,7 +2,7 @@
   hosts: "{{ HOST_GROUP_TO_INCLUDE }}"
   become: true
   tasks:
-  - name: Add epel repo
+  - name: Add epel repo to host
     yum_repository:
       name: epel
       description: EPEL YUM repo
