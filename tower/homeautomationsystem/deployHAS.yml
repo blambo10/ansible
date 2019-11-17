@@ -9,6 +9,8 @@
       - git
       - python
       - python-virtualenv
+      - python2-pip
+      - python3-pip
       - ansible
   - name: Install Python module for networking
     easy_install:
