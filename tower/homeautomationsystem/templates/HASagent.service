@@ -7,7 +7,7 @@ Type=simple
 User=root
 Group=root
 WorkingDirectory={{ installation_directory }}
-ExecStart=/usr/bin/python -u {{ installation_directory }}/has/HomeAutomationAgent.py
+ExecStart=/usr/bin/python -u {{ installation_directory }}/HomeAutomationAgent.py
 StandardOutput=syslog
 StandardError=syslog
 
