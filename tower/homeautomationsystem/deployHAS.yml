@@ -12,8 +12,12 @@
       - python2-pip
       - python3-pip
       - ansible
+#   - name: Install Python module for networking
+#     easy_install:
+#       name: configparser
+#   - name: Create directory
   - name: Install Python module for networking
-    easy_install:
+    pip:
       name: configparser
   - name: Create directory
     file: 
