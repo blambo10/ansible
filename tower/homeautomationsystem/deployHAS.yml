@@ -8,6 +8,7 @@
     with_items:
       - git
       - python 
+      - ansible
   - name: Install Python module for networking
     easy_install:
       name: configparser
