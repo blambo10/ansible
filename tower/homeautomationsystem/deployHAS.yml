@@ -26,7 +26,6 @@
       name: 
         - configparser
         - ipaddress
-        - socket
   - name: Create directory
     file: 
       path: "{{ installation_directory }}"
