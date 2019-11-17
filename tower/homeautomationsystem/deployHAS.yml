@@ -7,7 +7,8 @@
       name: "{{ item }}"
     with_items:
       - git
-      - python 
+      - python
+      - python-virtualenv
       - ansible
   - name: Install Python module for networking
     easy_install:
