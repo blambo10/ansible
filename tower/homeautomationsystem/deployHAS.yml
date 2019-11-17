@@ -51,9 +51,10 @@
     ignore_errors: true
   - name: Reload firewalld
     command: firewall-cmd --reload
+    when:  firewallstat.stdout.find('running') != -1
   - name: Reload Service Daemon
     command: systemctl daemon-reload
-    ignore_errors: true
+    when:  firewallstat.stdout.find('running') != -1
   - name: Enable service httpd, and not touch the running state
     service:
       name: HASagent
