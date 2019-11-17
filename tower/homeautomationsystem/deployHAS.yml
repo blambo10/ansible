@@ -17,6 +17,10 @@
 #     easy_install:
 #       name: configparser
 #   - name: Create directory
+  - name: Update pip
+    pip:
+      name: pip
+      state: latest
   - name: Install Python module for networking
     pip:
       name: 
