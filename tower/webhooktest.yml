@@ -3,4 +3,4 @@
   become: False
   gather_facts: False
   tasks:
-  - debug: msg="Runing Job"
+  - debug: msg="Running Job"
