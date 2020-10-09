@@ -1,5 +1,5 @@
 - name: Testing Github Webhooks
-  hosts: localhost
+  hosts: main
   become: False
   gather_facts: False
   tasks:
