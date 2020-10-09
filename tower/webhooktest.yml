@@ -1,0 +1,6 @@
+- name: Testing Github Webhooks
+  hosts: localhost
+  become: False
+  gather_facts: False
+  tasks:
+  - debug: msg="Runing Job"
