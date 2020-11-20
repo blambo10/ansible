@@ -1,7 +1,7 @@
 - name: ssh user management
   hosts: all
   # become: False
-  # gather_facts: False
+  gather_facts: False
   tasks:
 
   #[BL] Complete login to get default root
