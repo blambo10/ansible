@@ -15,6 +15,7 @@
       headers:
         X-Vault-Token: "{{ ansible_password }}"
         Content-Type: application/json
+    delegate_to: localhost
     register: shh_credentials
 
   # - name: Login to a form based webpage, then use the returned cookie to access the app in later tasks
