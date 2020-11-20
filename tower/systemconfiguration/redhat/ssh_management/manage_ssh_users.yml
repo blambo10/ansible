@@ -12,6 +12,7 @@
       # status_code: [200, 202]
       method: GET
       return_content: false
+      validate_certs: false
       headers:
         X-Vault-Token: "{{ ansible_password }}"
         Content-Type: application/json
