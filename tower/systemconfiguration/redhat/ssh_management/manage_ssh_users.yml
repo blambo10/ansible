@@ -45,8 +45,8 @@
       ansible_ssh_password: "{{ server_ssh_credentials.json.data.password }}"      
 
   - name: set new password
-      set_fact:
-        new_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') | password_hash('sha512') }}"
+    set_fact:
+      new_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') | password_hash('sha512') }}"
 
 - name: ssh user management
   hosts: all
