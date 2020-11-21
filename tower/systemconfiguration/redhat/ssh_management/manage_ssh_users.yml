@@ -59,12 +59,12 @@
   hosts: all
   gather_facts: False
   tasks:
-  - name: testing ssh
-    shell: hostname
-  # - name: update root password
-  #   user:
-  #     name: root
-  #     password: "letmein2"
+  # - name: testing ssh
+  #   shell: hostname
+  - name: update root password
+    user:
+      name: root
+      password: "abc123!"
   # - name: Testing
   #   shell: sshpass -p {{ ansible_password }} ssh {{ ansible_user }}@{{ inventory_hostname }} "echo success"
   #   register: ssh_test
