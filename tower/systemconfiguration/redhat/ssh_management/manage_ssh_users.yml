@@ -34,7 +34,7 @@
         Content-Type: application/json
     delegate_to: localhost
     when: server_ssh_credentials.status == 404
-    register: default_shh_credentials
+    register: server_ssh_credentials
 
 #   - name: Login to a form based webpage, then use the returned cookie to access the app in later tasks
 #     uri:
@@ -52,8 +52,8 @@
   
   - name: configure ansible vars
     set_fact:
-      ansible_user: "{{ default_shh_credentials.json.data.username }}"
-      ansible_password: "{{ default_shh_credentials.json.data.password }}"      
+      ansible_user: "{{ server_ssh_credentials.json.data.username }}"
+      ansible_password: "{{ server_ssh_credentials.json.data.password }}"      
 
 - name: ssh user management
   hosts: all
