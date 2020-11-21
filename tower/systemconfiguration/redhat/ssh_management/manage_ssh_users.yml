@@ -36,39 +36,44 @@
     when: server_ssh_credentials.status == 404
     register: server_ssh_credentials
 
-#   - name: Login to a form based webpage, then use the returned cookie to access the app in later tasks
-#     uri:
-#       url: 'https://{{ VAULT_SERVER_ADDRESS }}:{{ VAULT_SERVER_PORT }}/v1/secret/servers/linux/{{ inventory_hostname }}'
-#       method: POST
-#       validate_certs: false
-#       headers:
-#         X-Vault-Token: "{{ ansible_password }}"      
-#       body_format: json
-#       body:
-#         root_password: "letmein"
-#       status_code: 204
-#     delegate_to: localhost
-#     register: update_password
-  
   - name: configure ansible vars
     set_fact:
+      hashi_token: "{{ ansible_password }}"
       ansible_user: "{{ server_ssh_credentials.json.data.username }}"
       ansible_ssh_user: "{{ server_ssh_credentials.json.data.username }}"
       ansible_password: "{{ server_ssh_credentials.json.data.password }}"      
       ansible_ssh_password: "{{ server_ssh_credentials.json.data.password }}"      
 
+ - name: set new password
+    set_fact:
+      new_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') | password_hash('sha512') }}"
+
 - name: ssh user management
   hosts: all
   gather_facts: true
   tasks:
-  # - name: testing ssh
-  #   shell: hostname
   - name: update root password
     user:
       name: root
       update_password: always
-      password: "{{ 'abc123' |password_hash('sha512') }}"
+      password: "{{ new_password }}"
     no_log: false
+
+  - name: Login to a form based webpage, then use the returned cookie to access the app in later tasks
+    uri:
+      url: 'https://{{ VAULT_SERVER_ADDRESS }}:{{ VAULT_SERVER_PORT }}/v1/secret/servers/linux/{{ inventory_hostname }}'
+      method: POST
+      validate_certs: false
+      headers:
+        X-Vault-Token: "{{ hashi_token }}"      
+      body_format: json
+      body:
+        password: "{{ new_password }}"
+      status_code: 204
+    delegate_to: localhost
+    register: update_password
+
+
   # - name: Testing
   #   shell: sshpass -p {{ ansible_password }} ssh {{ ansible_user }}@{{ inventory_hostname }} "echo success"
   #   register: ssh_test
