@@ -20,19 +20,20 @@
         X-Vault-Token: "{{ ansible_password }}"
         Content-Type: application/json
     delegate_to: localhost
+    run_once: true
     register: shh_credentials
 
-  # - name: Login to a form based webpage, then use the returned cookie to access the app in later tasks
-  #   uri:
-  #     url: https://your.form.based.auth.example.com/index.php
-  #     method: POST
-  #     body_format: form-urlencoded
-  #     body:
-  #       name: your_username
-  #       password: your_password
-  #       enter: Sign in
-  #     status_code: 302
-  #   register: login
+  - name: Login to a form based webpage, then use the returned cookie to access the app in later tasks
+    uri:
+      url: 'https://{{ VAULT_SERVER_ADDRESS }}:{{ VAULT_SERVER_PORT }}/v1/secret/linux/{{ inventory_hostname }}'
+      method: POST
+      headers:
+        X-Vault-Token: "{{ ansible_password }}"      
+      body_format: json
+      body:
+        root_password: "{{ ansible_password }}"
+      # status_code: 302
+    register: update_password
   
 
   # - name: Testing
