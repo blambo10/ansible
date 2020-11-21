@@ -20,20 +20,24 @@
     delegate_to: localhost
     register: server_ssh_credentials
 
-  #[BL] Complete login to get default root
-  #     then use the default root to login to the server intially if success set p/w in vault then reset on server 
-  - name: Get Default root user from vault
-    uri:
-      url: 'https://{{ VAULT_SERVER_ADDRESS }}:{{ VAULT_SERVER_PORT }}/v1/secret/{{ HASHI_PATH }}'
-      method: GET
-      return_content: false
-      validate_certs: false
-      headers:
-        X-Vault-Token: "{{ ansible_password }}"
-        Content-Type: application/json
-    delegate_to: localhost
+  - name: Get default root
+    block:
+
+    #[BL] Complete login to get default root
+    #     then use the default root to login to the server intially if success set p/w in vault then reset on server 
+    - name: Get Default root user from vault
+      uri:
+        url: 'https://{{ VAULT_SERVER_ADDRESS }}:{{ VAULT_SERVER_PORT }}/v1/secret/{{ HASHI_PATH }}'
+        method: GET
+        return_content: false
+        validate_certs: false
+        headers:
+          X-Vault-Token: "{{ ansible_password }}"
+          Content-Type: application/json
+      delegate_to: localhost
+      when: server_ssh_credentials.status == 404
+      register: server_ssh_credentials
     when: server_ssh_credentials.status == 404
-    register: server_ssh_credentials
 
   - name: configure ansible vars
     set_fact:
@@ -41,7 +45,7 @@
       ansible_user: "{{ server_ssh_credentials.json.data.username }}"
       ansible_ssh_user: "{{ server_ssh_credentials.json.data.username }}"
       ansible_password: "{{ server_ssh_credentials.json.data.password }}"      
-      ansible_ssh_password: "{{ server_ssh_credentials.json.data.password }}"      
+      ansible_ssh_password: "{{ server_ssh_credentials.json.data.password }}"
 
   - name: set new password
     set_fact:
