@@ -59,7 +59,7 @@
 
 - name: ssh user management
   hosts: all
-  gather_facts: False
+  gather_facts: true
   tasks:
   # - name: testing ssh
   #   shell: hostname
