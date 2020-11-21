@@ -47,7 +47,7 @@
   gather_facts: False
   tasks:
   - name: Testing
-    shell: ssh root@{{ inventory_hostname }} "echo success"
+    shell: ssh sshpass {{ ansible_password }} {{ ansible_user }}@{{ inventory_hostname }} "echo success"
     register: ssh_test
     delegate_to: localhost
         # failed_when: "'No route to host' in ssh_test.stderr"
