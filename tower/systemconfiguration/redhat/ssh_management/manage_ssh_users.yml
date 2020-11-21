@@ -42,7 +42,9 @@
       ansible_ssh_user: "{{ servers_vault.json.data.username }}"
       ansible_password: "{{ servers_vault.json.data.password }}"      
       ansible_ssh_password: "{{ servers_vault.json.data.password }}"
-    when: servers_vault.status == 200
+    when: >
+      servers_vault.status is defined and 
+      servers_vault.status == 200
 
   - name: configure credentials
     set_fact:
@@ -51,7 +53,9 @@
       ansible_ssh_user: "{{ default_vault.json.data.username }}"
       ansible_password: "{{ default_vault.json.data.password }}"      
       ansible_ssh_password: "{{ default_vault.json.data.password }}"
-    when: default_vault.status == 200
+    when: >
+      default_vault.status is defined and 
+      default_vault.status == 200
 
 
   - name: set new password
