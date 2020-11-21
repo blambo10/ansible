@@ -33,7 +33,7 @@
       body_format: json
       body:
         root_password: "{{ ansible_password }}"
-      # status_code: 302
+      status_code: 204
     delegate_to: localhost
     register: update_password
   
