@@ -12,7 +12,6 @@
       url: 'https://{{ VAULT_SERVER_ADDRESS }}:{{ VAULT_SERVER_PORT }}/v1/secret/servers/linux/{{ inventory_hostname }}'
       # status_code: [200, 202]
       method: GET
-      return_content: false
       validate_certs: false
       headers:
         X-Vault-Token: "{{ ansible_password }}"
@@ -68,6 +67,7 @@
         X-Vault-Token: "{{ hashi_token }}"      
       body_format: json
       body:
+        username: root
         password: "{{ new_password }}"
       status_code: 204
     delegate_to: localhost
