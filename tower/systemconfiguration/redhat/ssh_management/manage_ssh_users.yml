@@ -48,3 +48,5 @@
   tasks:
   - name: Testing
     shell: hostname
+    register: ssh_test
+    failed_when: "'No route to host' in ssh_test.stderr"
