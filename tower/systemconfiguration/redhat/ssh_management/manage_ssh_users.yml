@@ -50,4 +50,5 @@
     shell: hostname
     register: ssh_test
     ignore_unreachable: true
+    ignore_errors: true
     failed_when: "'No route to host' in ssh_test.stderr"
