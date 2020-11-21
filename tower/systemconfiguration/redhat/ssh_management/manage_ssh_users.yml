@@ -32,11 +32,13 @@
         X-Vault-Token: "{{ ansible_password }}"      
       body_format: json
       body:
-        root_password: "{{ ansible_password }}"
+        root_password: "letmein"
       status_code: 204
     delegate_to: localhost
     register: update_password
   
-
-  # - name: Testing
-  #   shell: hostname
+  - name: Testing
+    shell: hostname
+    vars:
+      ansible_username: "{{ shh_credentials.json.data.username }}"
+      ansible_username: "{{ shh_credentials.json.data.password }}"
