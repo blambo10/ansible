@@ -4,6 +4,9 @@
   gather_facts: False
   tasks:
 
+  - debug:
+      msg: "{{ hostvars }}"
+
   #[BL] Complete login to get default root
   #     then use the default root to login to the server intially if success set p/w in vault then reset on server 
   - name: Get Default root user from vault
