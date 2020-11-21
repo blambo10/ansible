@@ -50,4 +50,4 @@
     shell: sshpass -p {{ ansible_password }} ssh {{ ansible_user }}@{{ inventory_hostname }} "echo success"
     register: ssh_test
     delegate_to: localhost
-        # failed_when: "'No route to host' in ssh_test.stderr"
+    failed_when: "'No route to host' in ssh_test.stderr"
