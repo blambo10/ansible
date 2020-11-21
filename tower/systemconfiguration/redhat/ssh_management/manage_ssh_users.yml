@@ -41,4 +41,4 @@
     shell: hostname
     vars:
       ansible_username: "{{ shh_credentials.json.data.username }}"
-      ansible_username: "{{ shh_credentials.json.data.password }}"
+      ansible_password: "{{ shh_credentials.json.data.password }}"
