@@ -17,26 +17,26 @@
       headers:
         X-Vault-Token: "{{ ansible_password }}"
         Content-Type: application/json
+    ignore_errors: true
     delegate_to: localhost
     run_once: true
-    register: default_shh_credentials
-
+    register: server_ssh_credentials
 
   #[BL] Complete login to get default root
   #     then use the default root to login to the server intially if success set p/w in vault then reset on server 
-#   - name: Get Default root user from vault
-#     uri:
-#       url: 'https://{{ VAULT_SERVER_ADDRESS }}:{{ VAULT_SERVER_PORT }}/v1/secret/{{ HASHI_PATH }}'
-#       # status_code: [200, 202]
-#       method: GET
-#       return_content: false
-#       validate_certs: false
-#       headers:
-#         X-Vault-Token: "{{ ansible_password }}"
-#         Content-Type: application/json
-#     delegate_to: localhost
-#     run_once: true
-#     register: default_shh_credentials
+  - name: Get Default root user from vault
+    uri:
+      url: 'https://{{ VAULT_SERVER_ADDRESS }}:{{ VAULT_SERVER_PORT }}/v1/secret/{{ HASHI_PATH }}'
+      method: GET
+      return_content: false
+      validate_certs: false
+      headers:
+        X-Vault-Token: "{{ ansible_password }}"
+        Content-Type: application/json
+    delegate_to: localhost
+    when: server_ssh_credentials.status == 404
+    run_once: true
+    register: default_shh_credentials
 
 #   - name: Login to a form based webpage, then use the returned cookie to access the app in later tasks
 #     uri:
