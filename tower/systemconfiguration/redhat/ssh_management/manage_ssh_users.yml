@@ -27,6 +27,7 @@
     uri:
       url: 'https://{{ VAULT_SERVER_ADDRESS }}:{{ VAULT_SERVER_PORT }}/v1/secret/linux/{{ inventory_hostname }}'
       method: POST
+      validate_certs: false
       headers:
         X-Vault-Token: "{{ ansible_password }}"      
       body_format: json
