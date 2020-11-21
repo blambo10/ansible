@@ -64,7 +64,7 @@
   - name: update root password
     user:
       name: root
-      password: "abc123!"
+      password: "{{ 'abc123!' | password_hash('sha512') }}"
   # - name: Testing
   #   shell: sshpass -p {{ ansible_password }} ssh {{ ansible_user }}@{{ inventory_hostname }} "echo success"
   #   register: ssh_test
