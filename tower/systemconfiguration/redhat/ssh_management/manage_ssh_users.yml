@@ -53,7 +53,9 @@
   - name: configure ansible vars
     set_fact:
       ansible_user: "{{ server_ssh_credentials.json.data.username }}"
+      ansible_ssh_user: "{{ server_ssh_credentials.json.data.username }}"
       ansible_password: "{{ server_ssh_credentials.json.data.password }}"      
+      ansible_ssh_password: "{{ server_ssh_credentials.json.data.password }}"      
 
 - name: ssh user management
   hosts: all
