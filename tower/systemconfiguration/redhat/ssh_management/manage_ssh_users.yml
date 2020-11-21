@@ -39,7 +39,7 @@
   
   - name: configure ansible vars
     set_fact:
-      ansible_username: "{{ shh_credentials.json.data.username }}"
+      ansible_user: "{{ shh_credentials.json.data.username }}"
       ansible_password: "{{ shh_credentials.json.data.password }}"      
 
 - name: ssh user management
