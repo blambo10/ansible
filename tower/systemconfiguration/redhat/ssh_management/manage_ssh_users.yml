@@ -50,17 +50,21 @@
 #     delegate_to: localhost
 #     register: update_password
   
-#   - name: configure ansible vars
-#     set_fact:
-#       ansible_user: "{{ default_shh_credentials.json.data.username }}"
-#       ansible_password: "{{ default_shh_credentials.json.data.password }}"      
+  - name: configure ansible vars
+    set_fact:
+      ansible_user: "{{ default_shh_credentials.json.data.username }}"
+      ansible_password: "{{ default_shh_credentials.json.data.password }}"      
 
-# - name: ssh user management
-#   hosts: all
-#   gather_facts: False
-#   tasks:
-#   - name: Testing
-#     shell: sshpass -p {{ ansible_password }} ssh {{ ansible_user }}@{{ inventory_hostname }} "echo success"
-#     register: ssh_test
-#     delegate_to: localhost
-#     failed_when: "'No route to host' in ssh_test.stderr"
+- name: ssh user management
+  hosts: all
+  gather_facts: False
+  tasks:
+  - name: update root password
+    user:
+      name: root
+      password: "letmein2"
+  # - name: Testing
+  #   shell: sshpass -p {{ ansible_password }} ssh {{ ansible_user }}@{{ inventory_hostname }} "echo success"
+  #   register: ssh_test
+  #   delegate_to: localhost
+  #   failed_when: "'No route to host' in ssh_test.stderr"
