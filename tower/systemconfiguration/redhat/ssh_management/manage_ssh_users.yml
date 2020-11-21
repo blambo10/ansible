@@ -67,7 +67,7 @@
     user:
       name: root
       password: "{{ 'abc123!' | hash('sha1') }}"
-      no_log: false
+    no_log: false
   # - name: Testing
   #   shell: sshpass -p {{ ansible_password }} ssh {{ ansible_user }}@{{ inventory_hostname }} "echo success"
   #   register: ssh_test
