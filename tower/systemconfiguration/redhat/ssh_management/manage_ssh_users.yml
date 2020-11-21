@@ -37,11 +37,16 @@
     delegate_to: localhost
     register: update_password
   
+  - name: configure ansible vars
+    set_fact:
+      ansible_username: "{{ shh_credentials.json.data.username }}"
+      ansible_password: "{{ shh_credentials.json.data.password }}"      
+
 - name: ssh user management
   hosts: all
 
   - name: Testing
     shell: hostname
-    vars:
-      ansible_username: "{{ shh_credentials.json.data.username }}"
-      ansible_password: "{{ shh_credentials.json.data.password }}"
+    # vars:
+    #   ansible_username: "{{ shh_credentials.json.data.username }}"
+    #   ansible_password: "{{ shh_credentials.json.data.password }}"
