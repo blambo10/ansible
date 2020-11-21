@@ -66,7 +66,8 @@
   - name: update root password
     user:
       name: root
-      password: tabc123
+      update_password: always
+      password: "{{ 'abc123' |password_hash('sha512') }}"
     no_log: false
   # - name: Testing
   #   shell: sshpass -p {{ ansible_password }} ssh {{ ansible_user }}@{{ inventory_hostname }} "echo success"
