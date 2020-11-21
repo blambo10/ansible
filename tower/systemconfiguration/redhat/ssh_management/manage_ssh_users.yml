@@ -1,7 +1,7 @@
-- name: ssh user management
+- name: Get user details from hashi vault
   hosts: all
   # become: False
-  # gather_facts: False
+  gather_facts: False
   tasks:
 
   - debug:
@@ -37,6 +37,9 @@
     delegate_to: localhost
     register: update_password
   
+- name: ssh user management
+  hosts: all
+
   - name: Testing
     shell: hostname
     vars:
