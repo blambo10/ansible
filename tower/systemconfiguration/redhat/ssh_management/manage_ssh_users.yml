@@ -46,7 +46,7 @@
 
   - name: set new password
     set_fact:
-      new_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') | password_hash('sha512') }}"
+      new_password: "{{ lookup('password', '/dev/null length=8 chars=ascii_letters') }}"
 
 - name: ssh user management
   hosts: all
@@ -56,7 +56,7 @@
     user:
       name: root
       update_password: always
-      password: "{{ new_password }}"
+      password: "{{ new_password | password_hash('sha512') }}"
     no_log: false
 
   - name: Login to a form based webpage, then use the returned cookie to access the app in later tasks
