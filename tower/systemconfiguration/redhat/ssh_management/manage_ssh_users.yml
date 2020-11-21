@@ -45,6 +45,7 @@
 - name: ssh user management
   hosts: all
 
+  tasks:
   - name: Testing
     shell: hostname
     # vars:
