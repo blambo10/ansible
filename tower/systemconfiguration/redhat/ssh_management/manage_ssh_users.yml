@@ -47,8 +47,7 @@
   gather_facts: False
   tasks:
   - name: Testing
-    shell: hostname
+    shell: ssh root@{{ inventory_hostname }} "echo success"
     register: ssh_test
-    ignore_unreachable: true
-    ignore_errors: true
-    failed_when: "'No route to host' in ssh_test.stderr"
+    delegate_to: localhost
+        # failed_when: "'No route to host' in ssh_test.stderr"
